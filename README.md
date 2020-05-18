@@ -4,4 +4,4 @@
 
 # usage
 
-gcc main.c && time a.out
+gcc main.c && time ./a.out
