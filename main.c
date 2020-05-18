@@ -8,20 +8,18 @@
 # define ENABLE_F 0
 #endif
 
-int     is_prime(int nb)
+int     is_prime(unsigned long long nb)
 {
     int     sqr;
     int     a;
     int     b;
     int     k;
 
-    if (nb <= 1)
+    if (nb <= 1 || nb == 4 || nb == 6 || !(nb % 2) || !(nb % 3) || !(nb % 5) || !(nb % 7))
         return (0);
-    if (nb == 2 || nb == 3 || nb == 5 || nb == 7)
-        return (1);
-    if (nb == 4 || nb == 6 || nb % 2 == 0 || nb % 3 == 0)
-        return (0);
-    sqr = sqrt(nb);
+    if (nb == 2 || nb == 3 || nb == 5 || nb == 7 || nb == 11)
+		return (0);
+	sqr = sqrt(nb);
     a = 0;
     b = 0;
     k = 1;
@@ -48,7 +46,7 @@ int 						main()
 	size_t					cnt;
 
 	cnt = 0;
-	z = UINT_MAX;
+	z =  UINT_MAX;
 	while (1)
 	{
 #if ENABLE_F == 1
