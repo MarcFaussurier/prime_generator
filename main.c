@@ -1,24 +1,39 @@
 #include "math.h"
 #include "stdio.h"
 #include "limits.h"
-#define ITERATIONS 100000
+#ifndef ITERATIONS
+# define ITERATIONS 100000
+#endif
+#ifndef ENABLE_F
+# define ENABLE_F 0
+#endif
 
-int 						is_prime(unsigned long long 	number) 
+int     is_prime(int nb)
 {
-	unsigned long long		a;
-	unsigned long long		b;
+    int     sqr;
+    int     a;
+    int     b;
+    int     k;
 
-	if (!number)
-		return (0);
-
-	a = 2;
-	while ((b = sqrt(number)) && (a < b))
-	{
-		if (! (number % a))
-			return (1);
-		a += 1;
-	}
-	return (0);
+    if (nb <= 1)
+        return (0);
+    if (nb == 2 || nb == 3 || nb == 5 || nb == 7)
+        return (1);
+    if (nb == 4 || nb == 6 || nb % 2 == 0 || nb % 3 == 0)
+        return (0);
+    sqr = sqrt(nb);
+    a = 0;
+    b = 0;
+    k = 1;
+    while (b < sqr)
+    {
+            a = (6 * k) - 1;
+            b = (6 * k) + 1;
+            if (nb % a == 0 || nb % b == 0)
+                return (0);
+            k += 1;
+        }
+    return (1);
 }
 
 unsigned long long			f(long double x)
@@ -36,7 +51,11 @@ int 						main()
 	z = UINT_MAX;
 	while (1)
 	{
-		i = f(z);
+#if ENABLE_F == 1
+	i = f(z);
+#else
+    i = z;
+#endif
 		if (is_prime(i) && ++cnt)
 			printf("PRIME FOUND: %llu	\n",i);
 		z += 1;
